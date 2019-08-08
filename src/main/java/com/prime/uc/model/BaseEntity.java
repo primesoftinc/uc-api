@@ -1,7 +1,12 @@
 package com.prime.uc.model;
 
+import java.util.UUID;
+
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +18,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class BaseEntity {
+    
     @Id
-    private String id;
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(generator = "uuid2")
+    private UUID id;
 }
