@@ -1,6 +1,8 @@
 package com.prime.uc.security;
 
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDetails loadUserById(String id) {
+    public UserDetails loadUserById(UUID id) {
         User user = userRepo.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("User", "id", id)
         );
