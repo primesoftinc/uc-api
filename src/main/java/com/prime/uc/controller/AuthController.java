@@ -17,7 +17,7 @@ import com.prime.uc.payload.ApiResponse;
 import com.prime.uc.payload.AuthResponse;
 import com.prime.uc.payload.LoginRequest;
 import com.prime.uc.payload.SignUpRequest;
-import com.prime.uc.repository.UserRepository;
+import com.prime.uc.repo.UserRepo;
 import com.prime.uc.security.TokenProvider;
 
 import javax.validation.Valid;
@@ -31,7 +31,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -57,7 +57,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(userRepo.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
 
@@ -70,7 +70,7 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        User result = userRepository.save(user);
+        User result = userRepo.save(user);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/user/me")

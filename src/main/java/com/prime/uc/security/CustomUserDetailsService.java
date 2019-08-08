@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.prime.uc.exception.ResourceNotFoundException;
 import com.prime.uc.model.User;
-import com.prime.uc.repository.UserRepository;
+import com.prime.uc.repo.UserRepo;
 
 /**
  * Created by rajeevkumarsingh on 02/08/17.
@@ -20,13 +20,13 @@ import com.prime.uc.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepo userRepo;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        User user = userRepo.findByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with email : " + email)
         );
@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserById(String id) {
-        User user = userRepository.findById(id).orElseThrow(
+        User user = userRepo.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("User", "id", id)
         );
 

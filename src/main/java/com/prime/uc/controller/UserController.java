@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prime.uc.exception.ResourceNotFoundException;
 import com.prime.uc.model.User;
-import com.prime.uc.repository.UserRepository;
+import com.prime.uc.repo.UserRepo;
 import com.prime.uc.security.CurrentUser;
 import com.prime.uc.security.UserPrincipal;
 
@@ -15,12 +15,12 @@ import com.prime.uc.security.UserPrincipal;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepo;
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
+        return userRepo.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 import com.prime.uc.exception.OAuth2AuthenticationProcessingException;
 import com.prime.uc.model.AuthProvider;
 import com.prime.uc.model.User;
-import com.prime.uc.repository.UserRepository;
+import com.prime.uc.repo.UserRepo;
 import com.prime.uc.security.UserPrincipal;
 import com.prime.uc.security.oauth2.user.OAuth2UserInfo;
 import com.prime.uc.security.oauth2.user.OAuth2UserInfoFactory;
@@ -24,7 +24,7 @@ import java.util.Optional;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepo;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -46,7 +46,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<User> userOptional = userRepo.findByEmail(oAuth2UserInfo.getEmail());
         User user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
@@ -71,13 +71,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(user);
+        return userRepo.save(user);
     }
 
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(existingUser);
+        return userRepo.save(existingUser);
     }
 
 }
