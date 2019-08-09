@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter @Setter
 @NoArgsConstructor
 @ToString
-public class Branch {
+public class Branch extends BaseEntity{
 
     private String branchName;
 }

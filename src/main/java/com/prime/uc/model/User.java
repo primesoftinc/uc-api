@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class User extends BaseEntity{
    
-    @Column(nullable = false)
+    @Column(nullable = false,name="username")
     private String name;
 
     @Email
@@ -36,11 +37,14 @@ public class User extends BaseEntity{
     @JsonIgnore
     private String password;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private AuthProvider provider;
+//    @NotNull
+//    @Enumerated(EnumType.STRING)
+    private String provider;
 
     private String providerId;
+    
+    @OneToMany(mappedBy="user")
+    private List<UserRole> userRoles;
 
 
 }
