@@ -1,4 +1,4 @@
-@TypeDef(defaultForType=UUID.class, typeClass=OptimizedUUIDType.class)
+//@TypeDef(defaultForType=UUID.class, typeClass=OptimizedUUIDType.class)
 package com.prime.uc.model;
 
 import java.util.UUID;
