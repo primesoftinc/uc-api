@@ -15,8 +15,8 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 public class UserSlotSymptomService {
 	@Autowired
 	private UserSlotSymptomRepo userSlotSymptomRepo;
-	@GraphQLMutation(name = "saveUserRole")
-    public UserSlotSymptom saveUserRole(@GraphQLArgument(name = "userSlot") UserSlotSymptom userSlotSymptom) {
+	@GraphQLMutation(name = "saveUserSlotSymptom")
+    public UserSlotSymptom saveUserSlotSymptom(@GraphQLArgument(name = "userSlot") UserSlotSymptom userSlotSymptom) {
         return userSlotSymptomRepo.save(userSlotSymptom);
     }
 }

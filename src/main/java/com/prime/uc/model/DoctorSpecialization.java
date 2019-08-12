@@ -27,5 +27,6 @@ public class DoctorSpecialization extends BaseEntity {
 	@Column(name="specialization")
 	private String specialization;
 	
+	
 
 }

@@ -17,7 +17,7 @@ public class DoctorUnavailabilityService {
 	@Autowired
 	private DoctorUnavailabilityRepo doctorUnavailabilityRepo;
 	
-	@GraphQLMutation(name = "saveUser")
+	@GraphQLMutation(name = "saveDoctorUnavailability")
     public DoctorUnavailability saveDoctorUnavailability(@GraphQLArgument(name = "doctorUnavailability") DoctorUnavailability doctorUnavailability) {
         return doctorUnavailabilityRepo.save(doctorUnavailability);
     }

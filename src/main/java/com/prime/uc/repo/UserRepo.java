@@ -19,5 +19,4 @@ public interface UserRepo extends JpaRepository<User, UUID> {
 	List<User> getUserById(UUID id);
 
     
-
 }

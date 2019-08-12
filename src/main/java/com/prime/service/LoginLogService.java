@@ -3,8 +3,8 @@ package com.prime.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prime.uc.model.UserSlot;
-import com.prime.uc.repo.UserSlotRepo;
+import com.prime.uc.model.LoginLog;
+import com.prime.uc.repo.LoginLogRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
@@ -12,13 +12,14 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
 @Service
 @GraphQLApi
-public class UserSlotService {
-	@Autowired
-	private UserSlotRepo userSlotRepo;
-	@GraphQLMutation(name = "saveUserSlot")
-    public UserSlot saveUserSlot(@GraphQLArgument(name = "userSlot") UserSlot userSlot) {
-        return userSlotRepo.save(userSlot);
-    }
+public class LoginLogService {
 	
+	@Autowired
+	private LoginLogRepo loginLogRepo;
+	
+	 @GraphQLMutation(name = "saveLoginLog")
+	    public LoginLog saveLoginLog(@GraphQLArgument(name = "loginLog") LoginLog loginLog) {
+	        return loginLogRepo.save(loginLog);
+	    }
 
 }
