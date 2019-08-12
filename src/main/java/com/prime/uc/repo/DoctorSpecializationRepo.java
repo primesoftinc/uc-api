@@ -9,6 +9,6 @@ import com.prime.uc.model.DoctorSpecialization;
 
 
 @Repository
-public interface DoctorSpecializaionRepo extends JpaRepository<DoctorSpecialization, UUID>{
+public interface DoctorSpecializationRepo extends JpaRepository<DoctorSpecialization, UUID>{
 
 }
