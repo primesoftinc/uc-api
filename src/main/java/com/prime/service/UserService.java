@@ -40,4 +40,10 @@ public class UserService {
     public User saveUser(@GraphQLArgument(name = "user") User user) {
         return userRepo.save(user);
     }
+    
+    @GraphQLQuery(name = "users")
+    public List<User> getUserById(@GraphQLArgument(name = "id")UUID id){
+    	return userRepo.getUserById(id);
+    }
+    
 }
