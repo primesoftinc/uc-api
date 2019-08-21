@@ -41,4 +41,7 @@ public class Branch extends BaseEntity{
 	
 	@Column(name="contact")
     private String contact;
+	
+	@Column(name="address")
+	private String address;
 }
