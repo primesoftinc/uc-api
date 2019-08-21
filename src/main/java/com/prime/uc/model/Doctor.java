@@ -27,4 +27,8 @@ public class Doctor extends BaseEntity {
 	@Column(name = "qualification")
 	private String qualification;
 
+	@Column(name = "doctor_name")
+	private String doctorName;
+	
+
 }
