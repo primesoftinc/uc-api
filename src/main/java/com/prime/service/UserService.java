@@ -39,4 +39,9 @@ public class UserService {
     	return userRepo.getUserById(id);
     }
     
+    @GraphQLQuery(name = "getUser")
+    public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
+        return userRepo.getUserDetails(name,password);
+	}
+    
 }
