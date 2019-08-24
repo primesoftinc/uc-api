@@ -1,10 +1,13 @@
 package com.prime.uc.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -29,6 +32,11 @@ public class Doctor extends BaseEntity {
 
 	@Column(name = "doctor_name")
 	private String doctorName;
+	
+	@OneToMany(mappedBy="doctor")
+	private List<DoctorSlot> doctorSlot;
+	
+	
 	
 
 }

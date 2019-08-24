@@ -22,7 +22,7 @@ public class DoctorSlotService {
 	@Autowired
 	private DoctoSlotRepo doctorSlotRepo;
 	
-	@GraphQLMutation(name = "doctorSlot")
+	@GraphQLMutation(name = "saveDoctorSlot")
     public DoctorSlot saveDoctorSlot(@GraphQLArgument(name = "doctorSlot") DoctorSlot doctorSlot) {
         return doctorSlotRepo.save(doctorSlot);
 	}

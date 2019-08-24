@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,16 +27,15 @@ public class UserSlot extends BaseEntity{
 	@ManyToOne(fetch=FetchType.LAZY)
 	private DoctorSlot doctorSlot;
 	
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	@Column(name="date")
-	private DateFormat date;
+	private String date;
 	
 	@JoinColumn(name="user_id")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private User user;
 	
-	@Column(name="conformation_code")
-	private String conformationCode;
+	@Column(name="confirmation_code")
+	private String confirmationCode;
 	
 	@Column(name="cancelled")
 	private Boolean cancelled;

@@ -1,11 +1,14 @@
 package com.prime.uc.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.engine.internal.Cascade;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +29,7 @@ public class DoctorSlot extends BaseEntity{
     private String slotTime;
 	
 	@JoinColumn(name = "doctor_id")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
     private Doctor doctor; 
 	
 }

@@ -9,5 +9,6 @@ import com.prime.uc.model.UserSlot;
 
 @Repository
 public interface UserSlotRepo  extends JpaRepository<UserSlot, UUID> {
+	
 
 }
