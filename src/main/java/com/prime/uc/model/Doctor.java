@@ -25,7 +25,7 @@ public class Doctor extends BaseEntity {
 
 	@JoinColumn(name="user_id")
 	@ManyToOne(fetch=FetchType.LAZY)
-	private User User;
+	private User user;
 	
 	@Column(name = "qualification")
 	private String qualification;
@@ -36,7 +36,9 @@ public class Doctor extends BaseEntity {
 	@OneToMany(mappedBy="doctor")
 	private List<DoctorSlot> doctorSlot;
 	
-	
+	@JoinColumn(name="branch_id")
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Branch branch;
 	
 
 }
