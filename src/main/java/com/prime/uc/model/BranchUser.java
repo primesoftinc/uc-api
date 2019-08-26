@@ -17,7 +17,7 @@ import lombok.ToString;
 @Getter @Setter
 @NoArgsConstructor
 @ToString
-public class BranchUser {
+public class BranchUser extends BaseEntity{
 
     @JoinColumn(name="branch_id")
     @ManyToOne(fetch=FetchType.LAZY)
