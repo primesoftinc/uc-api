@@ -28,7 +28,7 @@ public class DoctorService {
     }
 	
 	@GraphQLQuery(name = "getDoctorDetails")
-    public List<Doctor> getUserById(@GraphQLArgument(name = "id")UUID id){
-    	return doctorRepo.getUserByid(id);
+    public List<Doctor> getDoctorById(@GraphQLArgument(name = "id")UUID id){
+    	return doctorRepo.getDoctorById(id);
     }
 }

@@ -10,5 +10,5 @@ import com.prime.uc.model.Doctor;
 @Repository
 public interface DoctorRepo extends JpaRepository<Doctor, UUID>{
 
-	List<Doctor> getUserByid(UUID id);
+	List<Doctor> getDoctorById(UUID id);
 }
