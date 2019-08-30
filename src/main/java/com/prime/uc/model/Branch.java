@@ -1,7 +1,10 @@
 package com.prime.uc.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
@@ -44,4 +47,6 @@ public class Branch extends BaseEntity{
 	
 	@Column(name="address")
 	private String address;
+	
+	
 }
