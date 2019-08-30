@@ -28,7 +28,13 @@ public class User extends BaseEntity{
     @Email
     @Column(nullable = false)
     private String email;
+    
+    @Column
+    private String phone;
 
+    @Column
+    private String address;
+    
     private String imageUrl;
 
     @Column(nullable = false)
