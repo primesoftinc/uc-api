@@ -27,7 +27,7 @@ public class UserService {
     }
     
     
-    @GraphQLQuery(name = "Users")
+    @GraphQLQuery(name = "users")
     public List<User> getUsers(){
     	return userRepo.retrive();
     }
@@ -40,7 +40,7 @@ public class UserService {
     
     @GraphQLQuery(name = "getUser")
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
-        return userRepo.getUserDetails(name,password);
+        return userRepo.getUserDetails(name, password);
 	}
     
 
