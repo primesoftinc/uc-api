@@ -29,7 +29,7 @@ public class DoctorSlotService {
 	
 	@GraphQLQuery(name = "getSlot")
     public List<DoctorSlot> getDoctorSlotById(@GraphQLArgument(name = "id")UUID id){
-    	return DoctoSlotRepo.getUserById(id);
+    	return DoctoSlotRepo.getDoctorSlotById(id);
     }
     
 }

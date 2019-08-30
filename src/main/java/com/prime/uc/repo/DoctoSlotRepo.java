@@ -11,7 +11,7 @@ import com.prime.uc.model.DoctorSlot;
 @Repository
 public interface DoctoSlotRepo  extends JpaRepository<DoctorSlot, UUID> {
 
-	static List<DoctorSlot> getUserById(UUID id) {
+	static List<DoctorSlot> getDoctorSlotById(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
