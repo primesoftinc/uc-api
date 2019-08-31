@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -49,8 +51,23 @@ public class User extends BaseEntity{
 
     private String providerId;
     
+    @Column(name="first_name")
+    private String firstName;
+    
+    @Column(name="last_name")
+    private String lastName;
+   
     @OneToMany(mappedBy="user")
     private List<UserRole> userRoles;
+    
+    public String getFullName() {
+        String fullName =
+                Stream.of(this.firstName, this.lastName)
+                      .filter(s -> s != null && !s.isEmpty())
+                      .collect(Collectors.joining(" "));
+        return fullName;
+    }
+    
 
 
 }
