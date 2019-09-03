@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prime.uc.model.DoctorSlot;
 import com.prime.uc.model.UserRole;
 import com.prime.uc.repo.UserRoleRepo;
 
@@ -29,6 +28,5 @@ public class UserRoleService {
 	    public UserRole saveUserRole(@GraphQLArgument(name = "UserRole") UserRole userRole) {
 	        return userRoleRepo.save(userRole);
 		}
-	 
-	
+
 }

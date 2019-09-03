@@ -1,6 +1,7 @@
 package com.prime.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,18 @@ public class UserService {
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
         return userRepo.getUserDetails(name, password);
 	}
+    
+    @GraphQLMutation(name = "updateUser")
+    public int updateUser(@GraphQLArgument(name = "name") String name ,
+    		@GraphQLArgument(name = "firstName") String firstName,
+    		@GraphQLArgument(name = "lastName") String lastName,
+    		@GraphQLArgument(name = "password") String password,
+    		@GraphQLArgument(name = "email") String email,
+    		@GraphQLArgument(name = "address") String address,
+    		@GraphQLArgument(name = "phone") String phone,
+    		@GraphQLArgument(name = "id") UUID id) {
+        return userRepo.update(name,firstName,lastName,password,email,address,phone,id);
+    }
     
 
 }
