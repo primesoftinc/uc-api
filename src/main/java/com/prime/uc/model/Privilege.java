@@ -8,12 +8,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Data
 @Table(name="privilege")
 @NoArgsConstructor
+@Getter @Setter
+@ToString
 public class Privilege extends BaseEntity{
 	
 	@Column(name="privilege_code")
