@@ -33,6 +33,14 @@ public class BranchService {
     public List<Branch>getBranch() {
         return branchRepo.retrive();
     }
+	
+	@GraphQLMutation(name = "deleteBranch")
+    public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
+         branchRepo.deleteById(id);
+         return "delete sucessful";
+    }
+	
+	
 
 	@GraphQLQuery(name = "getBranchId")
     public BranchUser getBranchId(@GraphQLArgument(name="id")UUID id) {
