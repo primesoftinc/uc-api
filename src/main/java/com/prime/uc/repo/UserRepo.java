@@ -6,13 +6,12 @@ import java.util.UUID;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.jpa.repository.Query;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.prime.uc.model.BranchUser;
 import com.prime.uc.model.User;
 
 @Repository
@@ -25,14 +24,15 @@ public interface UserRepo extends JpaRepository<User, UUID> {
 	List<User> getUserById(UUID id);
 	
 	@Query("select u from User u where  u.name=?1 and u.password=?2")
-	User getUserDetails(String name,String password);
+	User getUserDetails(String name,String password);	
 	
 	
-	
-
 	@Query("select user from User user")
 	List<User> retrive();
 	
+	
+	@Query("select bu  from BranchUser bu join fetch bu.user u join fetch bu.branch b  where  b.id =?1")
+	List<BranchUser> getUsersBybranchID(UUID id);
 	
 	@Transactional
 	@Modifying
@@ -40,6 +40,10 @@ public interface UserRepo extends JpaRepository<User, UUID> {
 			+ " u.password = ?4 , u.email = ?5 , u.address = ?6 ,u.phone = ?7 where u.id =?8")
 	int update(String name, String firstName, String lastName, String password, String email, String address,
 			String phone, UUID id);
+	
+	
+	@Query("select bu from BranchUser bu join fetch bu.user u join fetch bu.branch where u.name =?1 and u.password=?2")
+	BranchUser getUserAndBranchDetails(String name, String password);
     
 
 }

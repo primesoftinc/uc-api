@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prime.uc.model.BranchUser;
 import com.prime.uc.model.User;
 import com.prime.uc.repo.UserRepo;
 
@@ -34,6 +35,12 @@ public class UserService {
     }
     
     
+    @GraphQLQuery(name = "usersByBranchID")
+    public List<BranchUser> getUsersBybrancID(@GraphQLArgument(name = "id") UUID id){
+    	return userRepo.getUsersBybranchID(id);
+    }
+    
+    
     @GraphQLMutation(name = "saveUser")
     public User saveUser(@GraphQLArgument(name = "user") User user) {
         return userRepo.save(user);
@@ -42,6 +49,11 @@ public class UserService {
     @GraphQLQuery(name = "getUser")
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
         return userRepo.getUserDetails(name, password);
+	}
+    
+    @GraphQLQuery(name = "getUserAndBranch")
+    public BranchUser getUserAndBranch(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
+        return userRepo.getUserAndBranchDetails(name, password);
 	}
     
     @GraphQLMutation(name = "updateUser")
