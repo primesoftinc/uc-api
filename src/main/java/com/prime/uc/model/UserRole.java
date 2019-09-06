@@ -1,5 +1,6 @@
 package com.prime.uc.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -16,7 +17,7 @@ public class UserRole  extends BaseEntity{
 	private User user;
 	
 	@JoinColumn(name = "role_id")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Role role;
 
 }
