@@ -46,6 +46,13 @@ public class UserService {
         return userRepo.save(user);
     }
     
+    @GraphQLMutation(name = "deleteUser")
+    public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
+    	userRepo.deleteById(id);
+         return "delete sucessful";
+    }
+	
+    
     @GraphQLQuery(name = "getUser")
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
         return userRepo.getUserDetails(name, password);
