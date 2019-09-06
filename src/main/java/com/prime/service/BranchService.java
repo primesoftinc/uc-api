@@ -49,15 +49,8 @@ public class BranchService {
 	
 	
 	@GraphQLMutation(name = "updateBranch")
-    public int updateBranch(@GraphQLArgument(name = "branch") String branchName ,
-    		@GraphQLArgument(name = "code") String code,
-    		@GraphQLArgument(name = "mobile") String mobile,
-    		@GraphQLArgument(name = "landPhone") String landPhone,
-    		@GraphQLArgument(name = "email") String email,
-    		@GraphQLArgument(name = "address") String address,
-    		@GraphQLArgument(name = "contact") String contact,
-    		@GraphQLArgument(name = "id") UUID id) {
-        return branchRepo.update(branchName,code,mobile,landPhone,email,address,contact,id);
+    public Branch updateBranch(@GraphQLArgument(name = "branch") Branch branch) {
+        return branchRepo.save(branch);
     }
 	
 
