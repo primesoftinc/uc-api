@@ -1,5 +1,6 @@
 package com.prime.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 public class UserSlotService {
 	@Autowired
 	private UserSlotRepo userSlotRepo;
+	
 	@GraphQLMutation(name = "saveUserSlot")
     public UserSlot saveUserSlot(@GraphQLArgument(name = "userSlot") UserSlot userSlot) {
         return userSlotRepo.save(userSlot);
@@ -28,6 +30,13 @@ public class UserSlotService {
     public UserSlot getBranchId(@GraphQLArgument(name="id")UUID id) {
         return userSlotRepo.retriveUserSlotByUserBranchId(id);
     }
+	
+	
+	@GraphQLQuery(name = "getAppointments")
+    public List<UserSlot> getAppointments(@GraphQLArgument(name = "doctorId") UUID doctorId) {
+        return userSlotRepo.getAppointmentsOrderByDate(doctorId);
+    }
+	
 	
 
 }

@@ -24,7 +24,6 @@ public class UserService {
 	private UserRepo userRepo;
 	
 	
-	
     @GraphQLQuery(name = "greeting")
     public String greeting() {
         return "hello world";
@@ -43,7 +42,7 @@ public class UserService {
     }
     
     
-  /*  @GraphQLMutation(name = "saveUser")
+   /* @GraphQLMutation(name = "saveUser")
     public User saveUser(@GraphQLArgument(name = "user") User user) {
         return userRepo.save(user);
     }*/
@@ -51,7 +50,14 @@ public class UserService {
     public User saveUser(User user) {
     	return userRepo.save(user);
     }
-
+    
+    @GraphQLMutation(name = "deleteUser")
+    public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
+    	userRepo.deleteById(id);
+         return "delete sucessful";
+    }
+	
+    
     @GraphQLQuery(name = "getUser")
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
         return userRepo.getUserDetails(name, password);

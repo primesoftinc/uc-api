@@ -1,5 +1,6 @@
 package com.prime.uc.repo;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,11 @@ public interface UserSlotRepo  extends JpaRepository<UserSlot, UUID> {
 	
 	@Query("select us from UserSlot us join fetch us.branch where us.branch.id = ?1")
 	UserSlot retriveUserSlotByUserBranchId(UUID id);
+	
+	@Query("select us from UserSlot us join fetch us.doctorSlot ds join fetch ds.doctor d where d.id =?1")
+	List<UserSlot> getAppointmentsOrderByDate(UUID doctorId);
+
+	
 	
 
 }
