@@ -68,6 +68,13 @@ public class User extends BaseEntity{
         return fullName;
     }
     
+    @Transient
+    private List<Doctor> doctor;
+    
+    @Transient
+    private Boolean isDoctor;
+   
+    
 
 
 }
