@@ -29,7 +29,7 @@ public class DoctorSlot extends BaseEntity{
     private String slotTime;
 	
 	@JoinColumn(name = "doctor_id")
-	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY )
     private Doctor doctor; 
 	
 }
