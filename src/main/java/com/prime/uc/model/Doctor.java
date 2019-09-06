@@ -40,5 +40,8 @@ public class Doctor extends BaseEntity {
     @ManyToOne(fetch=FetchType.LAZY)
     private Branch branch;
 	
+	@OneToMany(mappedBy="doctor")
+	List<DoctorSpecialization> doctorSpecializations;
+	
 
 }
