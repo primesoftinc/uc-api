@@ -31,4 +31,15 @@ public class DoctorService {
     public List<Doctor> getDoctorById(@GraphQLArgument(name = "id")UUID id){
     	return doctorRepo.getDoctorById(id);
     }
+	
+	@GraphQLQuery(name = "getDoctorsByBranch")
+    public List<Doctor> getDoctorsByBranch(@GraphQLArgument(name = "id")UUID id){
+		return doctorRepo.getDoctorsByBranch(id);
+    }
+	
+	@GraphQLMutation(name = "deleteDoctor")
+    public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
+		doctorRepo.deleteById(id);
+         return "delete sucessful";
+    }
 }
