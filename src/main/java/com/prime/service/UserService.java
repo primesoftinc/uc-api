@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.prime.uc.model.BranchUser;
 import com.prime.uc.model.User;
+import com.prime.uc.repo.DoctorRepo;
 import com.prime.uc.repo.UserRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -21,6 +22,7 @@ public class UserService {
 
 	@Autowired
 	private UserRepo userRepo;
+	
 	
 	
     @GraphQLQuery(name = "greeting")
@@ -41,11 +43,15 @@ public class UserService {
     }
     
     
-    @GraphQLMutation(name = "saveUser")
+  /*  @GraphQLMutation(name = "saveUser")
     public User saveUser(@GraphQLArgument(name = "user") User user) {
         return userRepo.save(user);
-    }
+    }*/
     
+    public User saveUser(User user) {
+    	return userRepo.save(user);
+    }
+
     @GraphQLQuery(name = "getUser")
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
         return userRepo.getUserDetails(name, password);
