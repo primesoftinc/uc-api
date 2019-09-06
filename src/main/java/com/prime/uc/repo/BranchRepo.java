@@ -19,8 +19,8 @@ public interface BranchRepo extends JpaRepository<Branch, UUID> {
 
 	Branch getUserByid(UUID id);
 
-
-	List<Branch> getBranchById(UUID id);
+	
+	Branch getBranchById(UUID id);
 	
 	@Query("select branch from Branch branch")
 	List<Branch> retrive();

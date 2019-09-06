@@ -34,6 +34,12 @@ public class BranchService {
         return branchRepo.retrive();
     }
 	
+	@GraphQLQuery(name = "getBranchById")
+    public Branch getBranchById(@GraphQLArgument(name = "id") UUID id) {
+        return branchRepo.getBranchById(id);
+    }
+	
+	
 	@GraphQLMutation(name = "deleteBranch")
     public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
          branchRepo.deleteById(id);
@@ -49,7 +55,7 @@ public class BranchService {
 	
 	
 	@GraphQLMutation(name = "updateBranch")
-    public int updateBranch(@GraphQLArgument(name = "branch") String branchName ,
+    public int updateBranch(@GraphQLArgument(name = "branchName") String branchName ,
     		@GraphQLArgument(name = "code") String code,
     		@GraphQLArgument(name = "mobile") String mobile,
     		@GraphQLArgument(name = "landPhone") String landPhone,
