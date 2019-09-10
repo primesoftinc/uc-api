@@ -2,6 +2,7 @@ package com.prime.uc.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class Role extends BaseEntity{
     private String roleName;
 	
 	@JoinColumn(name = "branch_id")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     private Branch branch;
 	
 	@OneToMany(mappedBy="role")
