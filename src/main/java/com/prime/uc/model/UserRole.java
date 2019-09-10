@@ -17,7 +17,7 @@ public class UserRole  extends BaseEntity{
 	private User user;
 	
 	@JoinColumn(name = "role_id")
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Role role;
 
 }

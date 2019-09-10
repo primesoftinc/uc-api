@@ -1,5 +1,8 @@
 package com.prime.uc.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,22 +16,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "doctor_specialization")
-@Getter   
-@Setter
+@Table(name = "specialization")
+@Getter @Setter
 @NoArgsConstructor
 @ToString
-public class DoctorSpecialization extends BaseEntity {
-	
-	@JoinColumn(name = "doctor_id")
+public class Specialization extends BaseEntity{
+	@Column(name="specialization_name")
+    private String specializtionName;
+
+	@JoinColumn(name = "branch_id")
 	@ManyToOne(fetch=FetchType.LAZY)
-	private Doctor doctor;
-	
-	
-	@JoinColumn(name = "specialization_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Specialization specialization;
-	
-	
+    private Branch branch;
 
 }
