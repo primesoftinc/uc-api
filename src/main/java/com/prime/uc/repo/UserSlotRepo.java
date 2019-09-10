@@ -20,6 +20,10 @@ public interface UserSlotRepo  extends JpaRepository<UserSlot, UUID> {
 	List<UserSlot> getAppointmentsOrderByDate(UUID doctorId);
 
 	
-	
+	@Query("select us from UserSlot us join fetch us.doctorSlot join fetch us.user where  us.branch.id =?1 and us.date = ?2")
+	List<UserSlot> retriveAppointmentsByBranchId(UUID branchId,String date);
+
+	@Query("select us from UserSlot us join fetch us.doctorSlot join fetch us.user where us.date between ?1 and ?2")
+	List<UserSlot> getAppointmentsBetweenDate(String fromDate, String toDate);
 
 }
