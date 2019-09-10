@@ -51,21 +51,24 @@ public class BranchUserService {
 	@GraphQLMutation(name = "saveBranchUser")
     public BranchUser saveBranchUserWithUser(@GraphQLArgument(name = "branchUser") BranchUser branchUser) {
 		User user= userRepo.save(branchUser.getUser());
+		user.setUserRoles(branchUser.getUser().getUserRoles());
 		branchUser.setUser(user);
 		List<UserRole> userRoles = user.getUserRoles().stream().map(ur -> {
 			ur.setUser(user);
 			return ur;
 		}).collect(Collectors.toList());
 		userRoleRepo.saveAll(userRoles);
-//		UUID uid =user.getId();
+		UUID uid =user.getId();
 		if(user.getIsDoctor()) {
 			Doctor doctor = new Doctor();
 			doctor.setUser(user);
 			doctor.setBranch(branchUser.getBranch());
 			doctor.setDoctorName(user.getName());
 			doctorRepo.save(doctor);
-			List<DoctorSpecialization> doctorSpecialization = user.getDoctor().get(0).getDoctorSpecializations().stream().map(ds -> {
+			List<DoctorSpecialization> doctorSpecialization = user.getDoctor().get(0).getDoctorSpecializations();
+			doctorSpecialization.stream().map(ds -> {
 				ds.setDoctor(doctor);
+//				ds.setSpecialization(ds.getSpecialization());
 				return ds;
 			}).collect(Collectors.toList());
 			 
