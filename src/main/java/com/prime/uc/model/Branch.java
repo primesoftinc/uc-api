@@ -48,5 +48,8 @@ public class Branch extends BaseEntity{
 	@Column(name="address")
 	private String address;
 	
+	@OneToMany(mappedBy="branch")
+	List<Specialization> Specialization; 
+	
 	
 }
