@@ -24,8 +24,10 @@ public class DoctorSpecialization extends BaseEntity {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Doctor doctor;
 	
-	@Column(name="specialization")
-	private String specialization;
+	
+	@JoinColumn(name = "specialization_id")
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Specialization specialization;
 	
 	
 
