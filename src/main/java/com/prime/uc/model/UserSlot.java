@@ -40,6 +40,9 @@ public class UserSlot extends BaseEntity{
 	@Column(name="cancelled")
 	private Boolean cancelled;
 	
+	@Column(name="`status`")
+	private String status;
+	
 	@Column(name="attended")
 	private String attended;
 	
