@@ -69,8 +69,8 @@ public class BranchService {
 	
 	@GraphQLQuery(name = "getAppointmentsBetweenDate")
 	public List<UserSlot> getAppointmentsBetweenDate(@GraphQLArgument(name = "fromDate") String fromDate,
-			@GraphQLArgument(name = "toDate") String toDate ){
-		return userSlotRepo.getAppointmentsBetweenDate(fromDate,toDate);
+			@GraphQLArgument(name = "toDate") String toDate ,@GraphQLArgument(name = "branchId") UUID branchId){
+		return userSlotRepo.getAppointmentsBetweenDate(branchId,fromDate,toDate);
 	}
 
 
