@@ -2,6 +2,7 @@ package com.prime.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -67,18 +68,21 @@ public class BranchUserService {
 		//List<DoctorSpecialization> doctorSpecialization =  branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
 		User user= userRepo.save(branchUser.getUser());
 		user.setUserRoles(branchUser.getUser().getUserRoles());
-		branchUser.setUser(user);
+		
 		List<UserRole> userRoles = user.getUserRoles().stream().map(ur -> {
 			ur.setUser(user);
 			return ur;
 		}).collect(Collectors.toList());
 		userRoleRepo.saveAll(userRoles);
+		user.setDoctors(branchUser.getUser().getDoctors());
+		branchUser.setUser(user);
 		UUID uid =user.getId();
 		if(isDoctor) {
-			doctorSpecialization = branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
+//			doctorSpecialization = branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
 			Doctor doctor = null;
 			if(branchUser.getUser().getDoctors().stream().findFirst().isPresent()) {
 				doctor = branchUser.getUser().getDoctors().stream().findFirst().get();
+				doctorSpecialization = doctor.getDoctorSpecializations();
 				if(StringUtils.isEmpty(doctor.getId())) {
 					doctor.setUser(user);
 					doctor.setBranch(branchUser.getBranch());
@@ -106,8 +110,12 @@ public class BranchUserService {
 	@GraphQLQuery(name = "getBranchUserById")
     public BranchUser getBranchUserById(@GraphQLArgument(name = "id") UUID id) {
        BranchUser branchUser = branchUserRepo.getBranchUserById(id);
-       if(branchUser.getUser().getDoctors().get(0).getDoctorSpecializations().size()!=0) {
-    	   branchUser.getUser().setIsDoctor(true);
+       Optional<Doctor> oDoctor = branchUser.getUser().getDoctors().stream().findFirst();
+       if(oDoctor.isPresent() ) {
+    	   Doctor doctor = oDoctor.get();
+    	   if(doctor.getDoctorSpecializations().size() > 0) {
+        	   branchUser.getUser().setIsDoctor(true);
+    	   }
        }
 	return branchUser;
        
