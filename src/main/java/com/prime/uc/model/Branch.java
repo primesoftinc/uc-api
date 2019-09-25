@@ -49,7 +49,10 @@ public class Branch extends BaseEntity{
 	private String address;
 	
 	@OneToMany(mappedBy="branch")
-	List<Specialization> Specialization; 
+	List<Specialization> specialization; 
+	
+	@OneToMany(mappedBy="branch")
+	List<Role> role;
 	
 	
 }
