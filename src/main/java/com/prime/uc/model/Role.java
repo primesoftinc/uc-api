@@ -27,7 +27,7 @@ public class Role extends BaseEntity{
     private String roleName;
 	
 	@JoinColumn(name = "branch_id")
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
     private Branch branch;
 	
 	@OneToMany(mappedBy="role")
