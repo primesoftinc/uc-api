@@ -44,6 +44,9 @@ public interface UserRepo extends JpaRepository<User, UUID> {
 	
 	@Query("select bu from BranchUser bu join fetch bu.user u join fetch bu.branch where u.name =?1 and u.password=?2")
 	BranchUser getUserAndBranchDetails(String name, String password);
+
+//	@Query("select u from User u join fetch u.doctor d where u.id=?1")
+//	User getDoctorSpecializationsById(UUID id);
     
 
 }

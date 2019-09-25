@@ -57,8 +57,14 @@ public class User extends BaseEntity{
     @Column(name="last_name")
     private String lastName;
    
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private List<UserRole> userRoles;
+    
+    @Transient
+    private List<String> selectedRoles;
+    
+    @Transient
+    private List<String> selectedSpecializations;
     
     public String getFullName() {
         String fullName =
@@ -68,11 +74,16 @@ public class User extends BaseEntity{
         return fullName;
     }
     
-    @Transient
-    private List<Doctor> doctor;
+    @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
+    private List<Doctor> doctors;
     
     @Transient
     private Boolean isDoctor;
+    
+    @OneToMany(mappedBy="user")
+    private List<BranchUser> branchUser;
+    
+    
    
     
 

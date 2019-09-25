@@ -80,6 +80,10 @@ public class UserService {
         return userRepo.update(name,firstName,lastName,password,email,address,phone,id);
     }
     
+//    @GraphQLQuery(name = "getDoctorSpecializationById")
+//    public User getDoctorSpecializationById(@GraphQLArgument(name = "id") UUID id) {
+//        return userRepo.getDoctorSpecializationsById(id);
+//	}
 
 }
 
