@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.prime.uc.model.DoctorSlot;
 import com.prime.uc.model.User;
+import com.prime.uc.model.UserSlot;
 import com.prime.uc.repo.DoctoSlotRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -30,6 +31,12 @@ public class DoctorSlotService {
 	@GraphQLQuery(name = "getSlot")
     public List<DoctorSlot> getDoctorSlotById(@GraphQLArgument(name = "id")UUID id){
     	return DoctoSlotRepo.getDoctorSlotById(id);
+    }
+	
+	
+	@GraphQLQuery(name = "getDoctorsByDay")
+    public List<DoctorSlot> getAppointments(@GraphQLArgument(name = "day") String day) {
+        return doctorSlotRepo.getDoctorsByDay(day);
     }
     
 }
