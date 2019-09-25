@@ -6,10 +6,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prime.uc.model.Doctor;
 import com.prime.uc.model.DoctorSlot;
 import com.prime.uc.model.User;
-import com.prime.uc.model.UserSlot;
 import com.prime.uc.repo.DoctoSlotRepo;
+
 
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
