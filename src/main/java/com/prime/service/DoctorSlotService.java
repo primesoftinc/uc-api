@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 import com.prime.uc.model.Doctor;
 import com.prime.uc.model.DoctorSlot;
 import com.prime.uc.model.User;
-import com.prime.uc.repo.DoctoSlotRepo;
-
+import com.prime.uc.repo.DoctorSlotRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
@@ -22,7 +21,7 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 public class DoctorSlotService {
 	
 	@Autowired
-	private DoctoSlotRepo doctorSlotRepo;
+	private DoctorSlotRepo doctorSlotRepo;
 	
 	@GraphQLMutation(name = "saveDoctorSlot")
     public DoctorSlot saveDoctorSlot(@GraphQLArgument(name = "doctorSlot") DoctorSlot doctorSlot) {
@@ -31,13 +30,14 @@ public class DoctorSlotService {
 	
 	@GraphQLQuery(name = "getSlot")
     public List<DoctorSlot> getDoctorSlotById(@GraphQLArgument(name = "id")UUID id){
-    	return DoctoSlotRepo.getDoctorSlotById(id);
+    	return DoctorSlotRepo.getDoctorSlotById(id);
     }
 	
-	
-	@GraphQLQuery(name = "getDoctorsByDay")
-    public List<DoctorSlot> getAppointments(@GraphQLArgument(name = "day") String day) {
-        return doctorSlotRepo.getDoctorsByDay(day);
+	@GraphQLQuery(name = "getSlotsByDoctor")
+    public List<Doctor> getSlotsByDoctor(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")String day){
+    	return doctorSlotRepo.getDoctorSlotsById(branchId, day);
     }
+
+	
     
 }
