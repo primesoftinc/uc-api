@@ -66,7 +66,9 @@ public class BranchUserService {
 		isDoctor = branchUser.getUser().getIsDoctor();
 		List<DoctorSpecialization> doctorSpecialization = new ArrayList<DoctorSpecialization>();
 		//List<DoctorSpecialization> doctorSpecialization =  branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
+		
 		User user= userRepo.save(branchUser.getUser());
+		user.setIsDoctor(isDoctor);
 		user.setUserRoles(branchUser.getUser().getUserRoles());
 		
 		List<UserRole> userRoles = user.getUserRoles().stream().map(ur -> {
@@ -82,12 +84,12 @@ public class BranchUserService {
 			Doctor doctor = null;
 			if(branchUser.getUser().getDoctors().stream().findFirst().isPresent()) {
 				doctor = branchUser.getUser().getDoctors().stream().findFirst().get();
-				doctorSpecialization = doctor.getDoctorSpecializations();
-				if(StringUtils.isEmpty(doctor.getId())) {
-					doctor.setUser(user);
+				doctorSpecialization = doctor.getDoctorSpecializations();	
+				doctor.setUser(user);
+//				if(StringUtils.isEmpty(doctor.getId())) {
 					doctor.setBranch(branchUser.getBranch());
 					doctor.setDoctorName(user.getName());
-				}
+//				}
 			}
 			doctorRepo.save(doctor);
 //			List<DoctorSpecialization> doctorSpecialization = user.getDoctors().get(0).getDoctorSpecializations();
