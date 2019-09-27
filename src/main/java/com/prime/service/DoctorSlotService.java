@@ -1,5 +1,6 @@
 package com.prime.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +25,8 @@ public class DoctorSlotService {
 	private DoctorSlotRepo doctorSlotRepo;
 	
 	@GraphQLMutation(name = "saveDoctorSlot")
-    public DoctorSlot saveDoctorSlot(@GraphQLArgument(name = "doctorSlot") DoctorSlot doctorSlot) {
-        return doctorSlotRepo.save(doctorSlot);
+    public List<DoctorSlot> saveDoctorSlot(@GraphQLArgument(name = "doctorSlots") List<DoctorSlot> doctorSlots) {
+        return doctorSlotRepo.saveAll(doctorSlots);
 	}
 	
 	@GraphQLQuery(name = "getSlot")
@@ -34,10 +35,22 @@ public class DoctorSlotService {
     }
 	
 	@GraphQLQuery(name = "getSlotsByDoctor")
-    public List<Doctor> getSlotsByDoctor(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")String day){
-    	return doctorSlotRepo.getDoctorSlotsById(branchId, day);
+    public List<Doctor> getSlotsByDoctor(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "doctorId")UUID doctorId,@GraphQLArgument(name = "day")String day){
+    	return doctorSlotRepo.getDoctorSlotsById(branchId,doctorId, day);
     }
 
+	@GraphQLQuery(name = "getSlotsByDay")
+    public List<Doctor> getSlotsByDay(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")List<String> days){
+		List<Doctor> ds = new ArrayList<Doctor>();
+//		for(int day = 0 ;day< days.size();day++) {
+			 ds = doctorSlotRepo.getSlotsByDay(days, branchId);
+
+//		}
+		return ds;
+    }
 	
-    
-}
+	@GraphQLMutation(name = "deleteBySlotTime")
+	public String deleteBranchById(@GraphQLArgument(name = "slotTime") String slotTime) {
+		doctorSlotRepo.deleteAllBySlotTime(slotTime);
+         return "delete sucessful";
+    }}
