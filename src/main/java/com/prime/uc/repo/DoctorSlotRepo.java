@@ -17,7 +17,7 @@ public interface DoctorSlotRepo  extends JpaRepository<DoctorSlot, UUID> {
 		return null;
 	}
  
-	@Query("select d from Doctor d join fetch d.branch b join fetch d.doctorSlot ds where b.id = ?1 and ds.day =?2")
+	@Query("select distinct d from Doctor d join fetch d.branch b join fetch d.doctorSlot ds where b.id = ?1 and ds.day =?2")
 	   List<Doctor> getDoctorSlotsById(UUID id, String day);
 
 }
