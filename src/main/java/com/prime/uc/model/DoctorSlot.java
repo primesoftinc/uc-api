@@ -32,4 +32,8 @@ public class DoctorSlot extends BaseEntity{
 	@ManyToOne(fetch=FetchType.LAZY )
     private Doctor doctor; 
 	
+	@JoinColumn(name = "branch_id")
+	@ManyToOne(fetch=FetchType.LAZY )
+    private Branch branch; 
+	
 }
