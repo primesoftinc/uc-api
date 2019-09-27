@@ -49,6 +49,12 @@ public class UserSlotService {
 		}else {
 			userSlotRepo.updateUserSlotCancell(id,false);
 		}
+		if(status.equals("attended")) {
+			userSlotRepo.updateUserSlotattended(id,"yes");
+
+		}else {
+			userSlotRepo.updateUserSlotattended(id,"no");
+		}
 	        return userSlotRepo.updateUserSlotStatus(status,id);
 	}
 	

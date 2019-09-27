@@ -45,4 +45,9 @@ public interface UserSlotRepo  extends JpaRepository<UserSlot, UUID> {
 	@Query("update UserSlot us set us.status = ?1 where us.id =?2")
 	int updateUserSlotStatus(String status, UUID id);
 
+	@Transactional
+	@Modifying
+	@Query("update UserSlot us set us.attended = ?1 where us.id =?2")
+	void updateUserSlotattended(UUID id, String b);
+
 }
