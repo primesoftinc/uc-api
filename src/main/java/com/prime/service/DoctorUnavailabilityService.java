@@ -1,5 +1,7 @@
 package com.prime.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,8 @@ public class DoctorUnavailabilityService {
 	private DoctorUnavailabilityRepo doctorUnavailabilityRepo;
 	
 	@GraphQLMutation(name = "saveDoctorUnavailability")
-    public DoctorUnavailability saveDoctorUnavailability(@GraphQLArgument(name = "doctorUnavailability") DoctorUnavailability doctorUnavailability) 
+    public List<DoctorUnavailability> saveDoctorUnavailability(@GraphQLArgument(name = "doctorUnavailability") List<DoctorUnavailability> doctorUnavailability) 
 	{
-        return doctorUnavailabilityRepo.save(doctorUnavailability);
+        return doctorUnavailabilityRepo.saveAll(doctorUnavailability);
     }
 }
