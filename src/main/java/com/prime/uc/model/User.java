@@ -56,6 +56,9 @@ public class User extends BaseEntity{
     
     @Column(name="last_name")
     private String lastName;
+    
+    @Column(name="is_deleted")
+    private Boolean isDeleted;
    
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private List<UserRole> userRoles;
