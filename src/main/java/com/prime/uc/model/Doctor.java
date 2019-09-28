@@ -33,6 +33,9 @@ public class Doctor extends BaseEntity {
 	@Column(name = "doctor_name")
 	private String doctorName;
 	
+	@Column(name="is_deleted")
+    private Boolean isDeleted;
+	
 	@OneToMany(mappedBy="doctor")
 	private List<DoctorSlot> doctorSlot;
 	

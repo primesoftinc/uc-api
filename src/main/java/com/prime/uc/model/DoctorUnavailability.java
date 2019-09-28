@@ -31,5 +31,9 @@ public class DoctorUnavailability extends BaseEntity {
 	@JoinColumn(name = "doctor_slot_id")
 	@ManyToOne(fetch=FetchType.LAZY)
 	private DoctorSlot doctorSlot;
+	
+	@JoinColumn(name = "branch_id")
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Branch branch;
 
 }
