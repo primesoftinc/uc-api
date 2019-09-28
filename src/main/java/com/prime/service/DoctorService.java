@@ -54,4 +54,10 @@ public class DoctorService {
 		doctorRepo.deleteById(id);
          return "delete sucessful";
     }
+	
+	@GraphQLMutation(name = "deleteAsSafeDelete")
+    public String deleteAsSafeDelete(@GraphQLArgument(name = "id") UUID id) {
+		doctorRepo.updateIsDeleted(true,id);
+         return "delete sucessful";
+    }
 }
