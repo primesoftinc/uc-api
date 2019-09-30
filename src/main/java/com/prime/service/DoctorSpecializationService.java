@@ -21,6 +21,7 @@ public class DoctorSpecializationService {
 	
 	@GraphQLMutation(name = "saveDoctorSpecialization")
     public DoctorSpecialization saveDoctorSpecialization(@GraphQLArgument(name = "user") DoctorSpecialization doctorSpecialization) {
+		doctorSpecialization.setIsDeleted(false);
         return doctorSpecializationRepo.save(doctorSpecialization);
     }
 	

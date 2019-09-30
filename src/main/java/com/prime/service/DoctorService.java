@@ -31,6 +31,7 @@ public class DoctorService {
     public Doctor saveDoctor(@GraphQLArgument(name = "doctor") Doctor doctor) {
 		UUID id = doctor.getId();
 		List<DoctorSlot>  ds = doctor.getDoctorSlot();
+		doctor.setIsDeleted(false);
 		ds.stream().map(d -> {
 			d.setDoctor(doctor);;
 			return ds;

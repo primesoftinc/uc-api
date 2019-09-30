@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import com.prime.uc.model.Branch;
 import com.prime.uc.model.BranchUser;
 import com.prime.uc.model.Doctor;
 import com.prime.uc.model.DoctorSpecialization;
@@ -63,7 +60,28 @@ public class BranchUserService {
 	@GraphQLMutation(name = "saveBranchUser")
     public BranchUser saveBranchUserWithUser(@GraphQLArgument(name = "branchUser") BranchUser branchUser) {
 		boolean isDoctor;
+		boolean isDeleted = false;
 		isDoctor = branchUser.getUser().getIsDoctor();
+//		List<UserRole> roleIds = branchUser.getUser().getUserRoles();
+//		List<UserRole> saveRoles = userRepo.getRolesByUserId(branchUser.getUser().getId());
+//		ArrayList<UUID> id = new ArrayList<UUID>();
+//		ArrayList<UUID> roleid = new ArrayList<UUID>();
+//		for(UserRole sr : saveRoles) {
+//			id.add(sr.getRole().getId());	
+//			
+//		}
+//		for(UserRole sr : roleIds) {
+//			sr.setIsDeleted(isDeleted);
+//			
+//		}
+//		for(int i =0;i<id.size();i++) {
+//			
+//				if(!roleid.contains(id.get(i))) {
+//					userRoleRepo.updateRoleIsDeleted(id.get(i));
+//				}
+//			
+//		}
+		branchUser.getUser().setIsDeleted(isDeleted);
 		List<DoctorSpecialization> doctorSpecialization = new ArrayList<DoctorSpecialization>();
 		//List<DoctorSpecialization> doctorSpecialization =  branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
 		
@@ -75,6 +93,7 @@ public class BranchUserService {
 			ur.setUser(user);
 			return ur;
 		}).collect(Collectors.toList());
+		
 		userRoleRepo.saveAll(userRoles);
 		user.setDoctors(branchUser.getUser().getDoctors());
 		branchUser.setUser(user);
@@ -83,6 +102,7 @@ public class BranchUserService {
 //			doctorSpecialization = branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
 			Doctor doctor = null;
 			if(branchUser.getUser().getDoctors().stream().findFirst().isPresent()) {
+				
 				doctor = branchUser.getUser().getDoctors().stream().findFirst().get();
 				doctorSpecialization = doctor.getDoctorSpecializations();	
 				doctor.setUser(user);
@@ -122,6 +142,13 @@ public class BranchUserService {
 	return branchUser;
        
     }
+	
+	@GraphQLMutation(name = "updateBranchUserIsDeleted")
+	public int updateBranchUserIsDeleted(@GraphQLArgument(name = "userId") UUID userId) {
+		
+		return branchUserRepo.updateBranchUserIsDeleted(userId);
+		
+	}
 	
 	
 	
