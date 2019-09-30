@@ -30,4 +30,7 @@ public class BranchUser extends BaseEntity{
     @Column(name="type")
     private String type;
     
+    @Column(name="isDeleted")
+    private Boolean isDeleted;
+    
 }
