@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
+@Where(clause="is_deleted=0")
 public class DoctorSpecialization extends BaseEntity {
 	
 	@JoinColumn(name = "doctor_id")
@@ -29,6 +32,9 @@ public class DoctorSpecialization extends BaseEntity {
 	@JoinColumn(name = "specialization_id")
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Specialization specialization;
+	
+	 @Column(name="is_deleted")
+	 private Boolean isDeleted;
 	
 	
 
