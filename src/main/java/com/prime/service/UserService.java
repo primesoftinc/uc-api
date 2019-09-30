@@ -7,9 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.prime.uc.model.BranchUser;
+import com.prime.uc.model.Doctor;
+import com.prime.uc.model.DoctorSpecialization;
 import com.prime.uc.model.User;
+import com.prime.uc.model.UserRole;
+import com.prime.uc.repo.BranchUserRepo;
 import com.prime.uc.repo.DoctorRepo;
+import com.prime.uc.repo.DoctorSpecializationRepo;
 import com.prime.uc.repo.UserRepo;
+import com.prime.uc.repo.UserRoleRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
@@ -23,6 +29,18 @@ public class UserService {
 	@Autowired
 	private UserRepo userRepo;
 	
+	@Autowired
+	private UserRoleRepo userRoleRepo;
+	
+	@Autowired
+	private DoctorSpecializationRepo doctorSpecializationRepo;
+	
+
+	@Autowired
+	private DoctorRepo doctorRepo;
+	
+	@Autowired
+	private BranchUserRepo branchUserRepo;
 	
     @GraphQLQuery(name = "greeting")
     public String greeting() {
@@ -37,8 +55,8 @@ public class UserService {
     
     
     @GraphQLQuery(name = "usersByBranchID")
-    public List<BranchUser> getUsersBybrancID(@GraphQLArgument(name = "id") UUID id){
-    	return userRepo.getUsersBybranchID(id);
+    public List<BranchUser> getUsersBybrancID(@GraphQLArgument(name = "id") UUID id,@GraphQLArgument(name = "isDeleted") Boolean isDeleted){
+    	return userRepo.getUsersBybranchID(id,false);
     }
     
     
@@ -53,7 +71,30 @@ public class UserService {
     
     @GraphQLMutation(name = "deleteUser")
     public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
-    	userRepo.deleteById(id);
+    	List<User> user = userRepo.getUserById(id);
+   	 	User u = user.stream().findFirst().get();
+   	 	Doctor d = u.getDoctors().stream().findFirst().get();
+   	 	List<DoctorSpecialization> doctorSpecialization = d.getDoctorSpecializations();
+   	 if(doctorSpecialization.stream().findFirst().isPresent()) {
+   		 u.setIsDoctor(true);
+   	 }
+   	 
+	   	 if(u.getIsDoctor()) {
+	   		for (DoctorSpecialization ds : doctorSpecialization) {
+				 UUID dsId = ds.getId();
+				 doctorSpecializationRepo.updateDoctorSpecializationIsDeleted(dsId);
+			}
+			doctorRepo.updateIsDeleted(true, d.getId());
+		 
+		 }
+	   	 List<UserRole> userRole = u.getUserRoles();
+	   	 for (UserRole userrole : userRole) {
+	   		 UUID urId = userrole.getId();
+	   		 userRoleRepo.updateRoleIsDeleted(urId);
+		}
+	   	BranchUser bu = u.getBranchUser().stream().findFirst().get();
+	   	branchUserRepo.updateBranchUserIsDeleted(bu.getId());
+    	userRepo.delete(id);
          return "delete sucessful";
     }
 	
