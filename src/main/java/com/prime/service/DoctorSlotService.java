@@ -35,8 +35,8 @@ public class DoctorSlotService {
     }
 	
 	@GraphQLQuery(name = "getSlotsByDoctor")
-    public List<Doctor> getSlotsByDoctor(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "doctorId")UUID doctorId,@GraphQLArgument(name = "day")String day){
-    	return doctorSlotRepo.getDoctorSlotsById(branchId,doctorId, day);
+    public List<Doctor> getSlotsByDoctor(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")String day){
+    	return doctorSlotRepo.getDoctorSlotsById(branchId, day);
     }
 
 	@GraphQLQuery(name = "getSlotsByDay")

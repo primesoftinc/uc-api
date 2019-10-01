@@ -21,6 +21,6 @@ public interface DoctorRepo extends JpaRepository<Doctor, UUID>{
 
 	@Transactional
 	@Modifying
-	@Query(value = "update Doctor d set d.isDeleted = ?1  where d.id =?2")
+	@Query( "update Doctor d set d.isDeleted = ?1  where d.id =?2")
 	void updateIsDeleted(Boolean b, UUID id);
 }
