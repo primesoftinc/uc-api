@@ -62,29 +62,9 @@ public class BranchUserService {
 		boolean isDoctor;
 		boolean isDeleted = false;
 		isDoctor = branchUser.getUser().getIsDoctor();
-//		List<UserRole> roleIds = branchUser.getUser().getUserRoles();
-//		List<UserRole> saveRoles = userRepo.getRolesByUserId(branchUser.getUser().getId());
-//		ArrayList<UUID> id = new ArrayList<UUID>();
-//		ArrayList<UUID> roleid = new ArrayList<UUID>();
-//		for(UserRole sr : saveRoles) {
-//			id.add(sr.getRole().getId());	
-//			
-//		}
-//		for(UserRole sr : roleIds) {
-//			sr.setIsDeleted(isDeleted);
-//			
-//		}
-//		for(int i =0;i<id.size();i++) {
-//			
-//				if(!roleid.contains(id.get(i))) {
-//					userRoleRepo.updateRoleIsDeleted(id.get(i));
-//				}
-//			
-//		}
+
 		branchUser.getUser().setIsDeleted(isDeleted);
 		List<DoctorSpecialization> doctorSpecialization = new ArrayList<DoctorSpecialization>();
-		//List<DoctorSpecialization> doctorSpecialization =  branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
-		
 		User user= userRepo.save(branchUser.getUser());
 		user.setIsDoctor(isDoctor);
 		user.setUserRoles(branchUser.getUser().getUserRoles());
@@ -93,13 +73,18 @@ public class BranchUserService {
 			ur.setUser(user);
 			return ur;
 		}).collect(Collectors.toList());
+		for (UserRole ur : userRoles) {
+			if(ur.getId() == null) {
+			ur.setIsDeleted(false);
+			}
+			userRoleRepo.save(ur);
+		}
 		
-		userRoleRepo.saveAll(userRoles);
+		//userRoleRepo.saveAll(userRoles);
 		user.setDoctors(branchUser.getUser().getDoctors());
 		branchUser.setUser(user);
 		UUID uid =user.getId();
 		if(isDoctor) {
-//			doctorSpecialization = branchUser.getUser().getDoctors().get(0).getDoctorSpecializations();
 			Doctor doctor = null;
 			if(branchUser.getUser().getDoctors().stream().findFirst().isPresent()) {
 				
@@ -112,17 +97,15 @@ public class BranchUserService {
 //				}
 			}
 			doctorRepo.save(doctor);
-//			List<DoctorSpecialization> doctorSpecialization = user.getDoctors().get(0).getDoctorSpecializations();
+
 			for (DoctorSpecialization ds : doctorSpecialization) {
+				if(ds.getId() == null) {
+				ds.setIsDeleted(false);
+				}
 				ds.setDoctor(doctor);
 			}
 			
-//			doctorSpecialization.stream().map(ds -> {
-//				ds.setDoctor(doctor);
-////				ds.setSpecialization(ds.getSpecialization());
-//				return ds;
-//			}).collect(Collectors.toList());
-			 
+
 			doctorSpecializationRepo.saveAll(doctorSpecialization);
 		}
 //		UUID urid = ur.getId();

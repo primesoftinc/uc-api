@@ -26,7 +26,7 @@ public class UserRoleService {
 	    }
 	 @GraphQLMutation(name = "saveUserRole")
 	    public UserRole saveUserRole(@GraphQLArgument(name = "UserRole") UserRole userRole) {
-		 userRole.setIsDeleted(false);
+//		 userRole.setIsDeleted(false);
 	        return userRoleRepo.save(userRole);
 		}
 
