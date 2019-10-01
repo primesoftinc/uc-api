@@ -43,7 +43,7 @@ public class DoctorSlotService {
     public List<Doctor> getSlotsByDay(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")List<String> days){
 		List<Doctor> ds = new ArrayList<Doctor>();
 //		for(int day = 0 ;day< days.size();day++) {
-			 ds = doctorSlotRepo.getSlotsByDay(days, branchId);
+			 ds = doctorSlotRepo.getSlotsByDay(days.get(0), branchId);
 
 //		}
 		return ds;
@@ -53,4 +53,10 @@ public class DoctorSlotService {
 	public String deleteBranchById(@GraphQLArgument(name = "slotTime") String slotTime) {
 		doctorSlotRepo.deleteAllBySlotTime(slotTime);
          return "delete sucessful";
-    }}
+    }
+	
+	@GraphQLQuery(name = "getSlots")
+    public List<DoctorSlot> getSlots(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")List<String> day){
+    	return doctorSlotRepo.getSlots(day, branchId);
+    }
+}

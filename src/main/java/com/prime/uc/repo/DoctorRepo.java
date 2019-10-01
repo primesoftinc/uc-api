@@ -16,7 +16,7 @@ public interface DoctorRepo extends JpaRepository<Doctor, UUID>{
 
 	List<Doctor> getDoctorById(UUID id);
 
-	@Query("select d from Doctor d join fetch d.branch b join fetch d.user u where b.id = ?1")
+	@Query("select d from Doctor d join fetch d.branch b join fetch d.user u where b.id = ?1 and d.isDeleted = False")
 	List<Doctor> getDoctorsByBranch(UUID id);
 
 	@Transactional
