@@ -19,19 +19,19 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 @Service
 @GraphQLApi
 public class DoctorUnavailabilityService {
-	
+
 	@Autowired
 	private DoctorUnavailabilityRepo doctorUnavailabilityRepo;
-	
+
 	@GraphQLMutation(name = "saveDoctorUnavailability")
-    public List<DoctorUnavailability> saveDoctorUnavailability(@GraphQLArgument(name = "doctorUnavailability") List<DoctorUnavailability> doctorUnavailability) 
-	{
-        return doctorUnavailabilityRepo.saveAll(doctorUnavailability);
-    }
-	
+	public List<DoctorUnavailability> saveDoctorUnavailability(
+			@GraphQLArgument(name = "doctorUnavailability") List<DoctorUnavailability> doctorUnavailability) {
+		return doctorUnavailabilityRepo.saveAll(doctorUnavailability);
+	}
 
 	@GraphQLQuery(name = "getDoctorUnavailabilityByBranch")
-    public List<DoctorUnavailability> getDoctorUnavailabilityByBranch(@GraphQLArgument(name = "branchId") UUID branchId ,@GraphQLArgument(name = "date") String date) {
-        return doctorUnavailabilityRepo.retriveDoctorUnavailabilityByBranchId(branchId,date);
-    }
+	public List<DoctorUnavailability> getDoctorUnavailabilityByBranch(@GraphQLArgument(name = "branchId") UUID branchId,
+			@GraphQLArgument(name = "date") String date) {
+		return doctorUnavailabilityRepo.retriveDoctorUnavailabilityByBranchId(branchId, date);
+	}
 }
