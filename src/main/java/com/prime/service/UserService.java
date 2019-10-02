@@ -73,11 +73,15 @@ public class UserService {
     public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
     	List<User> user = userRepo.getUserById(id);
    	 	User u = user.stream().findFirst().get();
+   	 	if(u.getDoctors().stream().findFirst().isPresent()) {
+   	 		
+   	 	
    	 	Doctor d = u.getDoctors().stream().findFirst().get();
    	 	List<DoctorSpecialization> doctorSpecialization = d.getDoctorSpecializations();
-   	 if(doctorSpecialization.stream().findFirst().isPresent()) {
-   		 u.setIsDoctor(true);
-   	 }
+	   	 if(doctorSpecialization.stream().findFirst().isPresent()) {
+	   		 u.setIsDoctor(true);
+	   	 }
+   	 	
    	 
 	   	 if(u.getIsDoctor()) {
 	   		for (DoctorSpecialization ds : doctorSpecialization) {
@@ -87,6 +91,7 @@ public class UserService {
 			doctorRepo.updateIsDeleted(true, d.getId());
 		 
 		 }
+   	 	}
 	   	 List<UserRole> userRole = u.getUserRoles();
 	   	 for (UserRole userrole : userRole) {
 	   		 UUID urId = userrole.getId();
