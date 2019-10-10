@@ -49,9 +49,9 @@ public class DoctorSlotService {
 		return ds;
     }
 	
-	@GraphQLMutation(name = "deleteBySlotTime")
-	public String deleteBranchById(@GraphQLArgument(name = "slotTime") String slotTime) {
-		doctorSlotRepo.deleteAllBySlotTime(slotTime);
+	@GraphQLMutation(name = "deleteById")
+	public String deleteBranchById(@GraphQLArgument(name = "id") UUID id) {
+		doctorSlotRepo.deleteById(id);
          return "delete sucessful";
     }
 	
