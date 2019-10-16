@@ -59,7 +59,10 @@ public class User extends BaseEntity{
     
     @Column(name="is_deleted")
     private Boolean isDeleted;
-   
+    
+    @Column(name="status")
+    private String status;
+    
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private List<UserRole> userRoles;
     

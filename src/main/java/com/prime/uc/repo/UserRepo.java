@@ -55,6 +55,14 @@ public interface UserRepo extends JpaRepository<User, UUID> {
 	@Query("select ur from UserRole ur join fetch ur.user u join fetch ur.role r  where u.id = ?1")
 	List<UserRole> getRolesByUserId(UUID id);
 
+	@Query("select u.name from User u")
+	List<String> getUserNames();
+
+	@Transactional
+	@Modifying
+	@Query("update User u set u.address = ?2,u.status = 'ADDRESS_DONE' where u.id = ?1")
+	int updateUserAddress(UUID userId,String address);
+
 	
 	
 	

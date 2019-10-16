@@ -99,7 +99,7 @@ public class UserService {
     }
 	
     
-    @GraphQLQuery(name = "getUser")
+    @GraphQLMutation(name = "getUser")
     public User getUser(@GraphQLArgument(name = "name") String name,@GraphQLArgument(name="password") String password) {
         return userRepo.getUserDetails(name, password);
 	}
@@ -125,6 +125,21 @@ public class UserService {
 //    public User getDoctorSpecializationById(@GraphQLArgument(name = "id") UUID id) {
 //        return userRepo.getDoctorSpecializationsById(id);
 //	}
+    
+    @GraphQLMutation(name = "createUser")
+    public User createUser(@GraphQLArgument(name = "user") User user ) {
+    	user.setEmailVerified(false);
+    	return userRepo.save(user);
+    }
 
+    @GraphQLQuery(name = "getUserNames")
+    public List<String> getUserNames() {
+        return userRepo.getUserNames();
+	}
+    
+    @GraphQLMutation(name = "updateUserAddress")
+    public int updateUserAddress(@GraphQLArgument(name = "userId") UUID userId,@GraphQLArgument(name = "address") String address ) {
+    	return userRepo.updateUserAddress(userId,address);
+    }
 }
 
