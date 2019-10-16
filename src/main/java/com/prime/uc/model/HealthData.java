@@ -22,8 +22,8 @@ public class HealthData  extends BaseEntity{
 	@Column(name="allergic_medicines")
     private String allergicMedicines;
 	
-	@Column(name="health_issue")
-    private String healthIssue;
+	@Column(name="health_issues")
+    private String healthIssues;
 	
 	@Column(name="height")
     private String height;
