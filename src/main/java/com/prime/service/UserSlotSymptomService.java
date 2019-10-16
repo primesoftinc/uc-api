@@ -23,8 +23,8 @@ public class UserSlotSymptomService {
 	private UserSlotSymptomRepo userSlotSymptomRepo;
 
 	@GraphQLMutation(name = "saveUserSlotSymptom")
-	public UserSlotSymptom saveUserSlotSymptom(@GraphQLArgument(name = "userSlot") UserSlotSymptom userSlotSymptom) {
-		return userSlotSymptomRepo.save(userSlotSymptom);
+	public List<UserSlotSymptom> saveUserSlotSymptom(@GraphQLArgument(name = "userSlot") List<UserSlotSymptom> userSlotSymptom) {
+		return userSlotSymptomRepo.saveAll(userSlotSymptom);
 	}
 
 	@GraphQLQuery(name = "getSymptom")
