@@ -74,6 +74,11 @@ public class UserSlotService {
         return userSlotRepo.getAppointmentsOrderByDate(doctorId);
     }
 	
+	@GraphQLQuery(name = "getUserSlotByUserId")
+    public List<UserSlot> getUserSlotByUserId(@GraphQLArgument(name="userId")UUID userId) {
+        return userSlotRepo.retrieveByUserId(userId);
+    }
+	
 	
 
 }
