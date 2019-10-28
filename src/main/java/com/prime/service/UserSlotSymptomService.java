@@ -31,4 +31,11 @@ public class UserSlotSymptomService {
 	public List<UserSlot> getUserById(@GraphQLArgument(name = "id") UUID id) {
 		return userSlotSymptomRepo.getUserSloySymptomById(id);
 	}
+	
+	@GraphQLQuery(name = "getUniqeSymptom")
+	public List<UserSlotSymptom> getSymptoms() {
+		return userSlotSymptomRepo.getuniqueSymptoms();
+	}
+	
+	
 }
