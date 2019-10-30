@@ -7,6 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.aspectj.weaver.World;
+import org.springframework.util.StringUtils;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,12 +27,12 @@ public class UserSlotSymptom extends BaseEntity{
 	private UserSlot userSlot;
 	
 	@Column(name="symptom")
-	private String Symptom;
+	private String symptom;
 	
 	@Column(name="duration")
 	private String duration;
 	
 	@Column(name="pain_level")
 	private String painLevel;
-
+	
 }

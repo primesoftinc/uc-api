@@ -15,7 +15,7 @@ public interface UserSlotSymptomRepo extends JpaRepository<UserSlotSymptom, UUID
 
 	List<UserSlot> getUserSloySymptomById(UUID id);
 
-	@Query("select us from UserSlotSymptom us")
+	@Query("select us from UserSlotSymptom us group by us.symptom")
 	List<UserSlotSymptom> getuniqueSymptoms();
 
 }
