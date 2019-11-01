@@ -32,7 +32,7 @@ public interface DoctorSlotRepo  extends JpaRepository<DoctorSlot, UUID> {
 	@Query("delete DoctorSlot d where d.slotTime = ?1")
 	void deleteAllBySlotTime(String slotTime);
 
-	@Query("select ds from DoctorSlot ds left join ds.doctor d  join fetch ds.branch b where  ds.day IN :days and b.id = :branchId and d.id IS NULL")
+	@Query("select ds from DoctorSlot ds left join ds.doctor d left join d.branch db left join fetch ds.branch b where (db.id = :branchId or b.id = :branchId)  and  ds.day IN :days order by d.id")
 	List<DoctorSlot> getSlots(@Param("days") List<String> day,@Param("branchId") UUID branchId);
 
 
