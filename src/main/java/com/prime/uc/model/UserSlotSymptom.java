@@ -27,12 +27,15 @@ public class UserSlotSymptom extends BaseEntity{
 	private UserSlot userSlot;
 	
 	@Column(name="symptom")
-	private String symptom;
+	private String Symptom;
 	
 	@Column(name="duration")
 	private String duration;
 	
 	@Column(name="pain_level")
 	private String painLevel;
+	
+	@Column(name="verified_symptom")
+	private String verifiedSymptom;
 	
 }
