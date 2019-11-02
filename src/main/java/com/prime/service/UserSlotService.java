@@ -3,13 +3,17 @@ package com.prime.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prime.uc.model.UserRole;
 import com.prime.uc.model.UserSlot;
+import com.prime.uc.model.UserSlotSymptom;
 import com.prime.uc.repo.UserRepo;
 import com.prime.uc.repo.UserSlotRepo;
+import com.prime.uc.repo.UserSlotSymptomRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
@@ -24,10 +28,24 @@ public class UserSlotService {
 	@Autowired
 	private UserRepo userRepo;
 	
+	 @Autowired
+	 private UserSlotSymptomRepo userSlotSymptomRepo;
 	
 	@GraphQLMutation(name = "saveUserSlot")
     public UserSlot saveUserSlot(@GraphQLArgument(name = "userSlot") UserSlot userSlot) {
-        return userSlotRepo.save(userSlot);
+       UserSlot us =  userSlotRepo.save(userSlot);
+       
+     List<UserSlotSymptom> listUs = userSlot.getUserSlotSymptom();
+
+   	List<UserSlotSymptom> symptomList = listUs.stream().map(s -> {
+		s.setUserSlot(us);
+		
+		return s;
+		
+	}).collect(Collectors.toList());
+   	
+   	userSlotSymptomRepo.saveAll(symptomList);
+       return us;
     }
 	@GraphQLMutation(name = "updateUserSlot")
     public UserSlot updateUserSlot(@GraphQLArgument(name = "userSlot") UserSlot userSlot) {
