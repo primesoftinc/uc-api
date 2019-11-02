@@ -141,5 +141,10 @@ public class UserService {
     public int updateUserAddress(@GraphQLArgument(name = "userId") UUID userId,@GraphQLArgument(name = "address") String address ) {
     	return userRepo.updateUserAddress(userId,address);
     }
+    
+    @GraphQLQuery(name= "getUserById")
+    public  List<User> getUser(@GraphQLArgument(name="id") UUID id) {
+    	return userRepo.getUserById(id);
+    }
 }
 
