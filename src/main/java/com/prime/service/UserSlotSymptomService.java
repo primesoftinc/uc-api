@@ -1,3 +1,4 @@
+
 package com.prime.service;
 
 import java.util.List;
@@ -19,23 +20,25 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 @Service
 @GraphQLApi
 public class UserSlotSymptomService {
-	@Autowired
-	private UserSlotSymptomRepo userSlotSymptomRepo;
+    @Autowired
+    private UserSlotSymptomRepo userSlotSymptomRepo;
 
-	@GraphQLMutation(name = "saveUserSlotSymptom")
-	public List<UserSlotSymptom> saveUserSlotSymptom(@GraphQLArgument(name = "userSlot") List<UserSlotSymptom> userSlotSymptom) {
-		return userSlotSymptomRepo.saveAll(userSlotSymptom);
-	}
+    @GraphQLMutation(name = "saveUserSlotSymptom")
+    public List<UserSlotSymptom> saveUserSlotSymptom(@GraphQLArgument(name = "userSlot") List<UserSlotSymptom> userSlotSymptom) {
+        return userSlotSymptomRepo.saveAll(userSlotSymptom);
+    }
 
-	@GraphQLQuery(name = "getSymptom")
-	public List<UserSlot> getUserById(@GraphQLArgument(name = "id") UUID id) {
-		return userSlotSymptomRepo.getUserSloySymptomById(id);
-	}
-	
-	@GraphQLQuery(name = "getUniqeSymptom")
-	public List<UserSlotSymptom> getSymptoms() {
-		return userSlotSymptomRepo.getuniqueSymptoms();
-	}
-	
-	
+    @GraphQLQuery(name = "getSymptom")
+    public List<UserSlot> getUserById(@GraphQLArgument(name = "id") UUID id) {
+        return userSlotSymptomRepo.getUserSloySymptomById(id);
+    }
+
+    @GraphQLQuery(name = "getUniqeSymptom")
+    public List<UserSlotSymptom> getSymptoms() {
+        return userSlotSymptomRepo.getuniqueSymptoms();
+    }
+
+
 }
+
+

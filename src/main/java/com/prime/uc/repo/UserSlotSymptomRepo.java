@@ -13,9 +13,10 @@ import com.prime.uc.model.UserSlotSymptom;
 @Repository
 public interface UserSlotSymptomRepo extends JpaRepository<UserSlotSymptom, UUID>{
 
-	List<UserSlot> getUserSloySymptomById(UUID id);
+    List<UserSlot> getUserSloySymptomById(UUID id);
 
-	@Query("select us from UserSlotSymptom us")
-	List<UserSlotSymptom> getuniqueSymptoms();
+    @Query("select us from UserSlotSymptom us")
+    List<UserSlotSymptom> getuniqueSymptoms();
 
 }
+
