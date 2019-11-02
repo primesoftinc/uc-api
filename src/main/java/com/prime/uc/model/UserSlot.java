@@ -3,6 +3,7 @@ package com.prime.uc.model;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -59,10 +61,7 @@ public class UserSlot extends BaseEntity{
 	@Column(name="lon")
 	private Double lon;
 	
+	@OneToMany(mappedBy="userSlot")
+	private List<UserSlotSymptom> userSlotSymptom;	
 	
-	
-	
-	
-	
-
 }
