@@ -34,6 +34,9 @@ public class HealthData  extends BaseEntity{
 	@Column(name="gender")
     private String gender;
 	
+	@Column(name="date_of_birth")
+	private String dateOfBirth;
+	
 	@JoinColumn(name="user_id")
 	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
