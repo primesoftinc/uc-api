@@ -63,6 +63,12 @@ public class User extends BaseEntity{
     @Column(name="status")
     private String status;
     
+    @Column(name ="lattitude")
+    private String lattitude;
+    
+    @Column(name="longitude")
+    private String longitude;
+    
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private List<UserRole> userRoles;
     
