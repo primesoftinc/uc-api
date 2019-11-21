@@ -48,6 +48,9 @@ public class Branch extends BaseEntity{
 	@Column(name="address")
 	private String address;
 	
+	@Column(name="time_zone")
+	private String timeZone;
+	
 	@OneToMany(mappedBy="branch")
 	List<Specialization> specialization; 
 	
