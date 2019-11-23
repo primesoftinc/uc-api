@@ -19,7 +19,7 @@ import lombok.ToString;
 @Getter @Setter
 @NoArgsConstructor
 @ToString
-public class BaseEntity implements Serializable {
+public class BaseEntity extends AuditFields implements Serializable  {
    private static final long serialVersionUID = 1L;  
 
 
