@@ -24,7 +24,7 @@ public class UserRole  extends BaseEntity{
 	private Role role;
 	
     @Column(name="is_deleted")
-    private Boolean isDeleted;
+    private Boolean isDeleted  = Boolean.FALSE;
 	
 
 }

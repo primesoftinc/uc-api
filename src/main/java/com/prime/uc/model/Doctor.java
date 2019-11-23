@@ -34,7 +34,7 @@ public class Doctor extends BaseEntity {
 	private String doctorName;
 	
 	@Column(name="is_deleted")
-    private Boolean isDeleted;
+    private Boolean isDeleted  = Boolean.FALSE;
 	
 	@OneToMany(mappedBy="doctor")
 	private List<DoctorSlot> doctorSlot;

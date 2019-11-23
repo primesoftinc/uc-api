@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class User extends BaseEntity{
     private String imageUrl;
 
     @Column(nullable = false)
-    private Boolean emailVerified = false;
+    private Boolean emailVerified;
     
     @Column
     private String password;
@@ -58,7 +59,7 @@ public class User extends BaseEntity{
     private String lastName;
     
     @Column(name="is_deleted")
-    private Boolean isDeleted;
+    private Boolean isDeleted = Boolean.FALSE;
     
     @Column(name="status")
     private String status;
@@ -96,7 +97,6 @@ public class User extends BaseEntity{
     private List<BranchUser> branchUser;
     
     
-   
     
 
 

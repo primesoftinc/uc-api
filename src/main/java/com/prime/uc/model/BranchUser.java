@@ -31,6 +31,6 @@ public class BranchUser extends BaseEntity{
     private String type;
     
     @Column(name="isDeleted")
-    private Boolean isDeleted;
+    private Boolean isDeleted  = Boolean.FALSE;
     
 }
