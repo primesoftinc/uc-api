@@ -54,4 +54,8 @@ public interface UserSlotRepo  extends JpaRepository<UserSlot, UUID> {
 	@Query("select  us from UserSlot us join fetch us.user u where u.id = ?1")
 	List<UserSlot> retrieveByUserId(UUID userId);
 
+	@Query("select us from UserSlot us where us.date = ?1 ")
+	List<UserSlot> getAllUserSlotsByDate(String date);
+
+
 }

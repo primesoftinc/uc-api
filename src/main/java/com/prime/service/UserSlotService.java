@@ -97,6 +97,10 @@ public class UserSlotService {
         return userSlotRepo.retrieveByUserId(userId);
     }
 	
+	@GraphQLQuery(name = "getAllUserSlotsByDate")
+    public List<UserSlot> getAllUserSlotsByDate(@GraphQLArgument(name="date")String date) {
+        return userSlotRepo.getAllUserSlotsByDate(date);
+    }
 	
 
 }
