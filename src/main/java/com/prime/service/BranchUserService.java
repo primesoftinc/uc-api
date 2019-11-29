@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prime.uc.model.Branch;
 import com.prime.uc.model.BranchUser;
 import com.prime.uc.model.Doctor;
 import com.prime.uc.model.DoctorSpecialization;
 import com.prime.uc.model.User;
 import com.prime.uc.model.UserRole;
+import com.prime.uc.repo.BranchRepo;
 import com.prime.uc.repo.BranchUserRepo;
 import com.prime.uc.repo.DoctorRepo;
 import com.prime.uc.repo.DoctorSpecializationRepo;
@@ -35,6 +37,9 @@ public class BranchUserService {
 	
 	@Autowired
 	private UserRepo userRepo;
+	
+	@Autowired
+	private BranchRepo branchRepo;
 	
 	@Autowired
 	private UserRoleRepo userRoleRepo;
@@ -133,6 +138,16 @@ public class BranchUserService {
 		
 	}
 	
+	
+
+	@GraphQLMutation(name = "createBranchAsAdmin")
+	public BranchUser createBranchAsAdmin(@GraphQLArgument(name = "branchAndUser") BranchUser branchAndUser) {
+		Branch b = branchAndUser.getBranch();
+		branchRepo.save(b);
+		 userRepo.save(branchAndUser.getUser());
+		 return branchUserRepo.save(branchAndUser);
+		
+	}
 	
 	
 }
