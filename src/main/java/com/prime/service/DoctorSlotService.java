@@ -7,9 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prime.uc.dto.DoctorSlotDto;
 import com.prime.uc.model.Doctor;
 import com.prime.uc.model.DoctorSlot;
-import com.prime.uc.model.User;
 import com.prime.uc.repo.DoctorSlotRepo;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -58,5 +58,16 @@ public class DoctorSlotService {
 	@GraphQLQuery(name = "getSlots")
     public List<DoctorSlot> getSlots(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")List<String> day){
     	return doctorSlotRepo.getSlots(day, branchId);
+    }
+	
+	@GraphQLQuery(name = "getSlotsByBranch")
+    public List<DoctorSlotDto> getSlotsByBranch(@GraphQLArgument(name = "branchId")UUID branchId){
+    	return doctorSlotRepo.getSlotsByBranchId( branchId);
+    }
+	
+	
+	@GraphQLQuery(name = "getAllSlots")
+    public List<DoctorSlot> getAllSlots(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")List<String> day){
+    	return doctorSlotRepo.getAllSlots(day, branchId);
     }
 }
