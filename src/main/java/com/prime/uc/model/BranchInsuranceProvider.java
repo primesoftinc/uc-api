@@ -14,20 +14,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "user_insurance")
+@Table(name = "branch_insurance_provider")
 @Getter @Setter
 @NoArgsConstructor
 @ToString
 
 public class BranchInsuranceProvider extends BaseEntity{
 
-	@Column(name="plan_name")
-    private String planName;
-	
-	@Column(name="picture")
-    private String picture;
-	
-	@Column(name="is_active")
+	@Column
     private Boolean isActive = Boolean.TRUE;
 	
 	@JoinColumn(name="branch_id")

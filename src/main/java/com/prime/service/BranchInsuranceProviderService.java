@@ -15,9 +15,11 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 public class BranchInsuranceProviderService {
 
 	@Autowired
-	private BranchInsuranceProviderRepo branchInsuranceProviderepo;
-	@GraphQLMutation(name = "saveRole")
+	private BranchInsuranceProviderRepo branchInsuranceProvideRepo;
+	
+	
+	@GraphQLMutation(name = "createBranchInsuranceProvider")
     public BranchInsuranceProvider saveBranchInsuranceProvider(@GraphQLArgument(name = "branchInsuranceProvider") BranchInsuranceProvider branchInsuranceProvider) {
-        return branchInsuranceProviderepo.save(branchInsuranceProvider);
+        return branchInsuranceProvideRepo.save(branchInsuranceProvider);
     }
 }
