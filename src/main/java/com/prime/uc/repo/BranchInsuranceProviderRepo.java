@@ -13,6 +13,8 @@ public interface BranchInsuranceProviderRepo extends JpaRepository<BranchInsuran
 	
 	List<BranchInsuranceProvider> findAll();
 
+	List<BranchInsuranceProvider> findAllByBranchId(UUID id);
+
 	
 	
 
