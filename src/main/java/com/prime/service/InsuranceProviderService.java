@@ -1,11 +1,12 @@
 package com.prime.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prime.uc.model.BranchInsuranceProvider;
 import com.prime.uc.model.InsuranceProvider;
 import com.prime.uc.repo.InsuranceProviderRepo;
 
@@ -21,12 +22,17 @@ public class InsuranceProviderService {
 	private InsuranceProviderRepo insuranceProviderRepo ;
 	
 	@GraphQLMutation(name = "createInsuranceProvider")
-    public InsuranceProvider saveBranchInsuranceProvider(@GraphQLArgument(name = "insuranceProvider") InsuranceProvider insuranceProvider) {
+    public InsuranceProvider saveInsuranceProvider(@GraphQLArgument(name = "insuranceProvider") InsuranceProvider insuranceProvider) {
         return insuranceProviderRepo.save(insuranceProvider);
     }
-	@GraphQLQuery(name="getProviderName")
-	public List<InsuranceProvider> getProviderName() {
+	@GraphQLQuery(name="getProviders")
+	public List<InsuranceProvider> getProviders() {
 		return insuranceProviderRepo.findAll();
+	}
+	
+	@GraphQLQuery(name="getProviderById")
+	public Optional<InsuranceProvider> getProviderById(@GraphQLArgument(name = "providerId") UUID providerId){
+		return insuranceProviderRepo.findById(providerId);
 	}
 
 }
