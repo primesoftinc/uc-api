@@ -21,7 +21,7 @@ public class InsuranceProviderService {
 	private InsuranceProviderRepo insuranceProviderRepo ;
 	
 	@GraphQLMutation(name = "createInsuranceProvider")
-    public InsuranceProvider saveBranchInsuranceProvider(@GraphQLArgument(name = "InsuranceProvider") InsuranceProvider insuranceProvider) {
+    public InsuranceProvider saveBranchInsuranceProvider(@GraphQLArgument(name = "insuranceProvider") InsuranceProvider insuranceProvider) {
         return insuranceProviderRepo.save(insuranceProvider);
     }
 	@GraphQLQuery(name="getProviderName")
