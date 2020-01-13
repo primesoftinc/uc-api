@@ -34,4 +34,10 @@ public class DoctorUnavailabilityService {
 			@GraphQLArgument(name = "date") String date) {
 		return doctorUnavailabilityRepo.retriveDoctorUnavailabilityByBranchId(branchId, date);
 	}
+	
+	@GraphQLMutation(name = "deleteDoctorUnavailability")
+	public int deleteDoctorUnavailability(
+			@GraphQLArgument(name = "ids") List<UUID> ids) {
+		return  doctorUnavailabilityRepo.deleteAllById(ids);
+	}
 }
