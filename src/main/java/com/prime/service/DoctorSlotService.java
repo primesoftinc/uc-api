@@ -3,11 +3,13 @@ package com.prime.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.prime.uc.dto.DoctorSlotDto;
+import com.prime.uc.dto.DoctorSlotsWithAvailabilityDto;
 import com.prime.uc.model.Doctor;
 import com.prime.uc.model.DoctorSlot;
 import com.prime.uc.repo.DoctorSlotRepo;
@@ -70,4 +72,36 @@ public class DoctorSlotService {
     public List<DoctorSlot> getAllSlots(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")List<String> day){
     	return doctorSlotRepo.getAllSlots(day, branchId);
     }
+	
+	@GraphQLQuery(name = "getSlotsFor")
+    public List<DoctorSlotsWithAvailabilityDto> getSlotsFor(@GraphQLArgument(name = "branchId")UUID branchId,@GraphQLArgument(name = "day")String day,@GraphQLArgument(name = "date")String date){
+    	
+		List<DoctorSlotDto> allSlots = doctorSlotRepo.getSlotsFor(branchId, day,date);
+		
+		
+		List<DoctorSlotsWithAvailabilityDto> doctors = allSlots.stream().collect(Collectors.groupingBy((slot) -> slot.getDoctorId()==null?"Branch":slot.getDoctorId())).values().stream().map(doctorSlots ->{
+			DoctorSlotsWithAvailabilityDto dto = new DoctorSlotsWithAvailabilityDto();
+			doctorSlots.stream().findFirst().ifPresent(firstSlot -> {
+				dto.setDoctorId(firstSlot.getDoctorId());
+				dto.setDoctorName(firstSlot.getDoctorName());
+				List<DoctorSlotDto> availableSlots = new ArrayList<>(), unavailableSlots = new ArrayList<>();
+				doctorSlots.stream().forEach(slot -> {
+					if(slot.getIsAvailable()>0) {
+						availableSlots.add(slot);
+					}else {
+						unavailableSlots.add(slot);
+					}
+				});
+				
+				dto.setAvailableSlots(availableSlots);
+				dto.setUnavailableSlots(unavailableSlots);
+			});
+
+			return dto;
+		}).collect(Collectors.toList());
+		
+	
+		return doctors;
+    }
 }
+

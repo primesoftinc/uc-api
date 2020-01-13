@@ -1,3 +1,4 @@
+
 package com.prime.uc.dto;
 
 public interface DoctorSlotDto {
@@ -5,5 +6,6 @@ public interface DoctorSlotDto {
 	String getDoctorId();
 	String getSlotTime();
 	String getSlotId();
-	
+	String getDoctorUnavailablityId();
+	Integer getIsAvailable();	
 }
