@@ -57,5 +57,8 @@ public class Branch extends BaseEntity{
 	@OneToMany(mappedBy="branch")
 	List<Role> role;
 	
+	@OneToMany(mappedBy ="branch")
+	List<UserFavourites> userFavourites;
+	
 	
 }

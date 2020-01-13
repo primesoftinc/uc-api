@@ -52,7 +52,8 @@ public class BranchService {
 
 	@GraphQLQuery(name = "getBranchId")
     public BranchUser getBranchId(@GraphQLArgument(name="id")UUID id) {
-        return branchRepo.retriveBranchByUserId(id);
+		return branchRepo.retriveBranchByUserId(id);
+        
     }
 	
 	
@@ -73,5 +74,10 @@ public class BranchService {
 		return userSlotRepo.getAppointmentsBetweenDate(branchId,fromDate,toDate);
 	}
 
+	@GraphQLMutation(name = "getBranches")
+    public List<Branch>getBranches() {
+        return branchRepo.retrive();
+    }
+	
 
 }
