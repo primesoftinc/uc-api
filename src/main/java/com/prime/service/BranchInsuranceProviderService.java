@@ -37,4 +37,9 @@ public class BranchInsuranceProviderService {
 	public List<BranchInsuranceProvider> getBranchInsuranceProviderByBranchId(@GraphQLArgument(name = "branchId") UUID id) {
 		return branchInsuranceProvideRepo.findAllByBranchId(id);
 	}
+	
+	@GraphQLQuery(name="getBranchProviders")
+	public List<BranchInsuranceProvider> getBranchProviders(){
+		return branchInsuranceProvideRepo.findAll();
+	}
 }
