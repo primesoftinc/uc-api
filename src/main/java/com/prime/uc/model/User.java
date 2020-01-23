@@ -1,20 +1,22 @@
 package com.prime.uc.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -38,6 +40,7 @@ public class User extends BaseEntity{
     @Column
     private String address;
     
+    @Column
     private String imageUrl;
 
     @Column(nullable = false)
@@ -65,10 +68,10 @@ public class User extends BaseEntity{
     private String status;
     
     @Column(name ="lattitude")
-    private String lattitude;
+    private Double  lattitude;
     
     @Column(name="longitude")
-    private String longitude;
+    private Double longitude;
     
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
     private List<UserRole> userRoles;

@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Where(clause="is_deleted=0")
+@Where(clause="is_deleted=false")
 public class UserRole  extends BaseEntity{
 	
 	@JoinColumn(name = "user_id")

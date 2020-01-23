@@ -1,5 +1,7 @@
 package com.prime.uc.model;
 
+import java.sql.Time;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +28,7 @@ public class DoctorSlot extends BaseEntity{
     private String day;
 	
 	@Column(name="slot_time")
-    private String slotTime;
+    private Time slotTime;
 	
 	@JoinColumn(name = "doctor_id")
 	@ManyToOne(fetch=FetchType.LAZY )

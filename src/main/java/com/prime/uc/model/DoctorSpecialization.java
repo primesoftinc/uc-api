@@ -21,7 +21,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Where(clause="is_deleted=0")
+@Where(clause="is_deleted=false")
 public class DoctorSpecialization extends BaseEntity {
 	
 	@JoinColumn(name = "doctor_id")

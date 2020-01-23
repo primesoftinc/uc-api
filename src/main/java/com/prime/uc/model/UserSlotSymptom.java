@@ -35,10 +35,11 @@ public class UserSlotSymptom extends BaseEntity{
 	@Column(name="pain_level")
 	private String painLevel;
 	
-	@Column(name="verified_symptom")
-	private Boolean verifiedSymptom=Boolean.FALSE;
+	@Column(name="verified_symptom" )
+	private Boolean verifiedSymptom = Boolean.FALSE;
 	
 	@Column(name="notes")
 	private String notes;
+	
 	
 }
