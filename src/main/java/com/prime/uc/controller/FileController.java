@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.prime.service.UcFileService;
 import com.prime.service.UserInsuranceService;
 import com.prime.uc.model.User;
 import com.prime.uc.repo.UserRepo;
@@ -30,8 +29,8 @@ import com.prime.uc.util.UploadImage;
 @RequestMapping("/file")
 public class FileController {
 	
-	@Autowired
-	private UcFileService ucFileService;
+//	@Autowired
+//	private UcFileService ucFileService;
 	
 	@Autowired
 	private UserInsuranceService userInsuranceService;
@@ -39,8 +38,8 @@ public class FileController {
 	@Autowired
 	private UserRepo userRepo;
 	
-	@Value("${basePath}")
-	private String imageBase;
+//	@Value("${basePath}")
+//	private String imageBase;
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public @ResponseBody User uploadFile(@RequestPart("files") MultipartFile file,
