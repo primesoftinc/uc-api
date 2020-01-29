@@ -55,36 +55,50 @@ public interface DoctorSlotRepo  extends JpaRepository<DoctorSlot, UUID> {
 	List<DoctorSlot> getAllSlots(@Param("days") List<String> day,@Param("branchId") UUID branchId);
 	
 	
-	@Query(value="SELECT d.doctor_name                  AS doctorName, \n" + 
-			"       Bin_to_uuid(d.id)              AS doctorId, \n" + 
-			"       Bin_to_uuid(ds.id)             AS slotId, \n" + 
-			"       ds.day                         AS day, \n" + 
-			"       ds.slot_time                   AS slotTime, \n" + 
-			"       Bin_to_uuid(du.id)             AS doctorUnavailablityId, \n" + 
-			"       IF(du.id IS NULL, TRUE, FALSE) AS isAvailable \n" + 
+	@Query(value="SELECT d.doctor_name          AS doctorName, \n" + 
+			"       Cast(d.id AS VARCHAR)  AS doctorId, \n" + 
+			"       Cast(ds.id AS VARCHAR)  AS slotId, \n" + 
+			"       ds.day                 AS day, \n" + 
+			"       ds.slot_time           AS slotTime, \n" + 
+			"       Cast(du.id AS VARCHAR) AS doctorUnavailablityId, \n" + 
+			"       s.specialization_name  AS specializationName, \n" + 
+			"       CASE \n" + 
+			"         WHEN du.id IS NULL THEN true \n" + 
+			"         ELSE false \n" + 
+			"       END                    AS isAvailable \n" + 
 			"FROM   doctor_slot ds \n" + 
-			"       inner join doctor d \n" + 
+			"       INNER JOIN doctor d \n" + 
 			"               ON d.id = ds.doctor_id \n" + 
-			"       left join doctor_unavailability du \n" + 
-			"              ON ds.id = du.doctor_slot_id and du.date = :date \n" + 
+			"       LEFT JOIN doctor_unavailability du \n" + 
+			"              ON ds.id = du.doctor_slot_id \n" + 
+			"                 AND du.date = :date \n" + 
+			"       INNER JOIN doctor_specialization dsp \n" + 
+			"               ON dsp.doctor_id = d.id \n" + 
+			"       INNER JOIN specialization s \n" + 
+			"               ON s.id = dsp.specialization_id \n" + 
 			"WHERE  ds.day = :day \n" + 
 			"       AND ds.branch_id = :branchId \n" + 
 			"UNION \n" + 
-			"(SELECT \"all slots\"                    AS doctorName, \n" + 
-			"        NULL                           AS doctorId, \n" + 
-			"        Bin_to_uuid(ds.id)             AS slotId, \n" + 
-			"        ds.day                         AS day, \n" + 
-			"        ds.slot_time                   AS slotTime, \n" + 
-			"        Bin_to_uuid(du.id)             AS doctorUnavailablityId, \n" + 
-			"        IF(du.id IS NULL, TRUE, FALSE) AS isAvailable \n" + 
+			"(SELECT 'All slots'            AS doctorName, \n" + 
+			"        NULL                   AS doctorId, \n" + 
+			"        Cast(ds.id AS VARCHAR) AS slotId, \n" + 
+			"        ds.day                 AS day, \n" + 
+			"        ds.slot_time           AS slotTime, \n" + 
+			"        Cast(du.id AS VARCHAR) AS doctorUnavailablityId, \n" + 
+			"        'specialization'       AS specializationName, \n" + 
+			"        CASE \n" + 
+			"          WHEN du.id IS NULL THEN true \n" + 
+			"          ELSE false \n" + 
+			"        END                    AS isAvailable \n" + 
 			" FROM   branch b \n" + 
-			"        left join doctor_slot ds \n" + 
+			"        LEFT JOIN doctor_slot ds \n" + 
 			"               ON ds.branch_id = b.id \n" + 
 			"                  AND doctor_id IS NULL \n" + 
-			"        left join doctor_unavailability du \n" + 
-			"               ON ds.id = du.doctor_slot_id and du.date = :date\n" + 
-			" WHERE  b.id = :branchId" + 
-			"        AND ds.day = :day) ", nativeQuery=true)
+			"        LEFT JOIN doctor_unavailability du \n" + 
+			"               ON ds.id = du.doctor_slot_id \n" + 
+			"                  AND du.date = :date \n" + 
+			" WHERE  b.id = :branchId \n" + 
+			"        AND ds.day = :day)", nativeQuery=true)
 	List<DoctorSlotDto> getSlotsFor(@Param("branchId") UUID branchId, @Param("day") String day,@Param("date") String date);
 
 	

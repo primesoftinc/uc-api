@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.engine.internal.Cascade;
 
@@ -37,5 +38,10 @@ public class DoctorSlot extends BaseEntity{
 	@JoinColumn(name = "branch_id")
 	@ManyToOne(fetch=FetchType.LAZY )
     private Branch branch; 
+	
+	@Transient
+	@JoinColumn(name = "user_slot_id")
+	@ManyToOne(fetch= FetchType.LAZY)
+	private UserSlot userSlot;
 	
 }

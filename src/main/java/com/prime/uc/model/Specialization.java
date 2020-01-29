@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString
 public class Specialization extends BaseEntity{
 	@Column(name="specialization_name")
-    private String specializtionName;
+    private String specializationName;
 
 	@JoinColumn(name = "branch_id")
 	@ManyToOne(fetch=FetchType.LAZY)

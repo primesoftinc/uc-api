@@ -84,9 +84,10 @@ public class DoctorSlotService {
 			doctorSlots.stream().findFirst().ifPresent(firstSlot -> {
 				dto.setDoctorId(firstSlot.getDoctorId());
 				dto.setDoctorName(firstSlot.getDoctorName());
+				dto.setSpecializationName(firstSlot.getSpecializationName());
 				List<DoctorSlotDto> availableSlots = new ArrayList<>(), unavailableSlots = new ArrayList<>();
 				doctorSlots.stream().forEach(slot -> {
-					if(slot.getIsAvailable()>0) {
+					if(slot.getIsAvailable()) {
 						availableSlots.add(slot);
 					}else {
 						unavailableSlots.add(slot);

@@ -1,11 +1,15 @@
 
 package com.prime.uc.dto;
 
+import java.sql.Time;
+
 public interface DoctorSlotDto {
 	String getDoctorName();
 	String getDoctorId();
-	String getSlotTime();
 	String getSlotId();
+	String getday();
+	Time getSlotTime();
 	String getDoctorUnavailablityId();
-	Integer getIsAvailable();	
+	String getSpecializationName();
+	Boolean getIsAvailable();	
 }

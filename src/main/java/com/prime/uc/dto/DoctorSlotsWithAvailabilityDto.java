@@ -2,14 +2,20 @@
 package com.prime.uc.dto;
 
 import java.util.List;
+import java.util.UUID;
+
+import org.hibernate.annotations.Type;
 
 import lombok.Data;
 @Data
 public class DoctorSlotsWithAvailabilityDto {
+	
 	String doctorName;
 	String doctorId;
 	List<DoctorSlotDto> availableSlots;
 	List<DoctorSlotDto> unavailableSlots;
+	String specializationName;
+	
 	public String getDoctorName() {
 		return doctorName;
 	}
@@ -33,6 +39,9 @@ public class DoctorSlotsWithAvailabilityDto {
 	}
 	public void setUnavailableSlots(List<DoctorSlotDto> unavailableSlots) {
 		this.unavailableSlots = unavailableSlots;
+	}
+	public void setSpecializtionName(String specializationName) {
+		this.specializationName =specializationName ;
 	}
 	
 	
